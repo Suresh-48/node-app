@@ -29,7 +29,7 @@ connect(database, {
 
 // Start the server
 const port = process.env.PORT || 5004;
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Application is running on port ${port}`);
 });
 
