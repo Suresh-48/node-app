@@ -3,7 +3,7 @@ import Teacher from "../models/teacherModel.js";
 import { getAll, deleteOne, updateOne } from "./baseController.js";
 import sendMail from "../utils/sendMail.js";
 
-const { FROM_EMAIL, FROM_EMAIL_DISPLAY_NAME } = process.env;
+const { FROM_EMAIL, FROM_EMAIL_DISPLAY_NAME } = process.config.env;
 
 export async function createTeacherApplication(req, res, next) {
   try {

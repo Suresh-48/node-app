@@ -17,9 +17,9 @@ const createToken = (id) => {
     {
       id,
     },
-    process.env.JWT_SECRET,
+    process.config.env.JWT_SECRET,
     {
-      expiresIn: process.env.JWT_EXPIRES_IN,
+      expiresIn: process.config.env.JWT_EXPIRES_IN,
     }
   );
 };

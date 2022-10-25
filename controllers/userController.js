@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 dotenv.config({ silent: true });
 import { getAll, getOne, deleteOne, createOne, updateOne } from "./baseController.js";
 import getRandomNumberForMail from "../utils/sendEmail.js";
-const { JWT_SECRET, JWT_EXPIRES_IN } = process.env;
+const { JWT_SECRET, JWT_EXPIRES_IN } = process.config.env;
 
 export const createUser = createOne(User);
 export const updateUser = updateOne(User);

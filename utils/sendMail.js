@@ -4,7 +4,7 @@ import emailTemplates from "email-templates";
 import dotenv from "dotenv";
 dotenv.config({ silent: true });
 
-const { SENDGRID_API_KEY } = process.env;
+const { SENDGRID_API_KEY } = process.config.env;
 
 const sendgridAPI = sendgrid(SENDGRID_API_KEY);
 const mailHelper = sendgrid.mail;

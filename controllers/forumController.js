@@ -7,7 +7,7 @@ import nodemailer from "nodemailer";
 import { EMAIL, PASSWORD } from "../config.js";
 import sgMail from "@sendgrid/mail";
 import sendMail from "../utils/sendMail.js";
-const { FROM_EMAIL, FROM_EMAIL_DISPLAY_NAME } = process.env;
+const { FROM_EMAIL, FROM_EMAIL_DISPLAY_NAME } = process.config.env;
 
 sgMail.setApiKey("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");
 let transporter = nodemailer.createTransport({
@@ -17,7 +17,6 @@ let transporter = nodemailer.createTransport({
     pass: PASSWORD,
   },
 });
-
 
 export async function createForum(req, res, next) {
   try {
@@ -50,7 +49,6 @@ export async function createForum(req, res, next) {
     };
 
     const forumStudentEmailData = {
-      
       to: userData.email,
       from: FROM_EMAIL,
       subject: "Student Created forum ",
@@ -88,13 +86,10 @@ export async function updateForum(req, res, next) {
 
     const getUserDetails = await User.findOne({ _id: data.user });
 
-   
-
     res.status(201).json({
       message: " Updated Forum Questions Successfully",
       editDetail,
     });
-    
   } catch (error) {
     next(error);
   }
@@ -185,39 +180,36 @@ export async function updateForumQuestionstatus(req, res, next) {
       new: true,
       runValidators: true,
     });
-const userDetails= await User.findOne({_id : forumQuestion.userId})
+    const userDetails = await User.findOne({ _id: forumQuestion.userId });
 
+    const forumStudentStatusEmail = {
+      appUrl: `http:localhost:3000/login`,
+      websiteBaseUrl: "http:localhost:3000",
+      facebookUrl: "http:localhost:3000",
+      twitterUrl: "http:localhost:3000",
+      instagramUrl: "http:localhost:3000",
+      linkedInUrl: "http:localhost:3000",
+      dribbleUrl: "http:localhost:3000",
+      emailLogoUrl: "http:localhost:3000",
+      copyRightText: "http:localhost:3000",
+      emailPrimaryBackgroundColor: "#009dda",
+      emailPrimaryTextColor: "#FFFFFF",
+      mediaBaseUrl: "http:localhost:3000",
+      marketplaceName: "http:localhost:3000",
+      studentName: `${userDetails.firstName} ${userDetails.lastName}`,
+      message: editedData.status,
+    };
 
-const forumStudentStatusEmail = {
-  appUrl: `http:localhost:3000/login`,
-  websiteBaseUrl: "http:localhost:3000",
-  facebookUrl: "http:localhost:3000",
-  twitterUrl: "http:localhost:3000",
-  instagramUrl: "http:localhost:3000",
-  linkedInUrl: "http:localhost:3000",
-  dribbleUrl: "http:localhost:3000",
-  emailLogoUrl: "http:localhost:3000",
-  copyRightText: "http:localhost:3000",
-  emailPrimaryBackgroundColor: "#009dda",
-  emailPrimaryTextColor: "#FFFFFF",
-  mediaBaseUrl: "http:localhost:3000",
-  marketplaceName: "http:localhost:3000",
-  studentName: `${userDetails.firstName} ${userDetails.lastName}`,
-  message: editedData.status,
-  
-  
-};
+    const forumStudentStatusData = {
+      // to: FROM_EMAIL,
+      to: userDetails.email,
+      // to: "civildinesh313@gmail.com",
 
-const forumStudentStatusData = {
-  // to: FROM_EMAIL,
-  to: userDetails.email,
-  // to: "civildinesh313@gmail.com",
- 
-  from: FROM_EMAIL,
-  subject: "Student forum Status ",
-  template: "ForumStatus",
-  substitutions: forumStudentStatusEmail ,
-};
+      from: FROM_EMAIL,
+      subject: "Student forum Status ",
+      template: "ForumStatus",
+      substitutions: forumStudentStatusEmail,
+    };
 
     res.status(201).json({
       message: "Forum Status Updated Successfully",
@@ -227,7 +219,6 @@ const forumStudentStatusData = {
       // To send a Email Notifications
       sendMail(forumStudentStatusData, () => {});
     });
-    
   } catch (error) {
     next(error);
   }
@@ -305,10 +296,6 @@ export async function deleteForumQuestion(req, res, next) {
         question: data.question,
       });
 
-     
-
-      
-
       res.status(200).json({
         message: "Forum Question Deleted Successfuly",
       });
@@ -317,7 +304,6 @@ export async function deleteForumQuestion(req, res, next) {
         sendMail(forumStudentDeleteEmailData, () => {});
       });
     } else {
-      
     }
   } catch (error) {
     next(error);
@@ -344,8 +330,6 @@ export async function enableForumchat(req, res, next) {
       message: "Forum Chat Status Updated Successfully",
       updateChatStatus,
     });
-   
-     
   } catch (error) {
     next(error);
   }
