@@ -4,7 +4,7 @@ const { connect } = mongoose;
 import { config } from "dotenv";
 
 config({
-  path: "./.env",
+  path: "./.config.env",
 });
 
 process.on("uncaughtException", (err) => {
@@ -15,7 +15,7 @@ process.on("uncaughtException", (err) => {
 
 import app from "./app.js";
 
-const database = process.env.DATABASE.replace("<PASSWORD>", process.env.DATABASE_PASSWORD);
+const database = process.config.env.DATABASE.replace("<PASSWORD>", process.config.env.DATABASE_PASSWORD);
 
 // Connect the database
 connect(database, {
