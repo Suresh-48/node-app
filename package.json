@@ -7,7 +7,8 @@
   "type": "module",
   "scripts": {
     "debug": "ndb server.js",
-    "start": "nodemon —exec babel-node server.js --es-module-specifier-resolution=node"
+    "start": "nodemon —exec babel-node server.js --es-module-specifier-resolution=node",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Aviar Technology",
   "license": "ISC",
