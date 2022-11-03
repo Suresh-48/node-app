@@ -8,7 +8,7 @@
   "scripts": {
     "debug": "ndb server.js",
     "start": "nodemon —exec babel-node server.js --es-module-specifier-resolution=node",
-    "test": "test command here"
+    "test": "npm run unit"
   },
   "author": "Aviar Technology",
   "license": "ISC",
