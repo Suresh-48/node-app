@@ -8,7 +8,7 @@ import cors from "cors";
 import globalErrHandler from "./controllers/errorController.js";
 import fs from "fs";
 
-const file = fs.readFileSync("./AF332FAD10F3B75ADAF7FA343542C616.txt");
+const file = fs.readFileSync("./81D9E49136E158773F8AA5A4FAA1E3AC.txt");
 //ngrok.exe http -host-header=rewrite localhost:5000
 // Routes
 
@@ -60,8 +60,8 @@ const limiter = rateLimit({
 
 app.use("/api", limiter);
 
-app.get("/.well-known/pki-validation/AF332FAD10F3B75ADAF7FA343542C616.txt", (req, res) => {
-  res.sendFile(file);
+app.get("/.well-known/pki-validation/81D9E49136E158773F8AA5A4FAA1E3AC.txt", (req, res) => {
+  res.sendFile("./81D9E49136E158773F8AA5A4FAA1E3AC.txt");
 });
 
 // Body parser, reading data from body into req.body
