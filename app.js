@@ -61,7 +61,7 @@ const limiter = rateLimit({
 app.use("/api", limiter);
 
 app.get("/.well-known/pki-validation/81D9E49136E158773F8AA5A4FAA1E3AC.txt", (req, res) => {
-  res.sendFile("./81D9E49136E158773F8AA5A4FAA1E3AC.txt");
+  res.sendFile("E:kharphiGithubNew folder\node-app81D9E49136E158773F8AA5A4FAA1E3AC.txt");
 });
 
 // Body parser, reading data from body into req.body
