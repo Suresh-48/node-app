@@ -6,6 +6,9 @@ import xss from "xss-clean";
 import hpp from "hpp";
 import cors from "cors";
 import globalErrHandler from "./controllers/errorController.js";
+import fs from "fs";
+
+const file = fs.readFileSync("./AF332FAD10F3B75ADAF7FA343542C616.txt");
 //ngrok.exe http -host-header=rewrite localhost:5000
 // Routes
 
@@ -40,7 +43,6 @@ import favouriteCourseRoutes from "./routes/favouriteCourseRoutes.js";
 import forumRoutes from "./routes/forumRoutes.js";
 import forumConversationRoutes from "./routes/forumConversationRoutes.js";
 
-
 const app = express();
 
 // Allow Cross-Origin requests
@@ -57,6 +59,10 @@ const limiter = rateLimit({
 });
 
 app.use("/api", limiter);
+
+app.get("/.well-known/pki-validation/AF332FAD10F3B75ADAF7FA343542C616.txt", (req, res) => {
+  res.sendFile(file);
+});
 
 // Body parser, reading data from body into req.body
 app.use(
@@ -120,7 +126,6 @@ app.use("/api/v1/teacherAvailability", teacherAvailabilityRoutes);
 
 app.use("/api/v1/teacherApplication", teacherApplicationRoutes);
 
-
 app.use("/api/v1/chat", chatRoutes);
 
 app.use("/api/v1/chatbot", chatBotRoutes);
@@ -130,7 +135,6 @@ app.use("/api/v1/forum", forumRoutes);
 app.use("/api/v1/forum/conversation", forumConversationRoutes);
 
 app.use("/api/v1/favouriteCourse", favouriteCourseRoutes);
-
 
 // handle undefined Routes
 app.use("*", (req, res, next) => {
