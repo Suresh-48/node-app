@@ -7,9 +7,6 @@ import hpp from "hpp";
 import cors from "cors";
 import globalErrHandler from "./controllers/errorController.js";
 import * as fs from "fs";
-import key from "./certificates/key.pem";
-
-var privateKey = fs.readFileSync(key, "utf8");
 
 //ngrok.exe http -host-header=rewrite localhost:5000
 // Routes
