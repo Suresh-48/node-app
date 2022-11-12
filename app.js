@@ -6,9 +6,11 @@ import xss from "xss-clean";
 import hpp from "hpp";
 import cors from "cors";
 import globalErrHandler from "./controllers/errorController.js";
-import fs from "fs";
+import * as fs from "fs";
+import key from "./certificates/key.pem";
 
-const file = fs.readFileSync("./81D9E49136E158773F8AA5A4FAA1E3AC.txt");
+var privateKey = fs.readFileSync(key, "utf8");
+
 //ngrok.exe http -host-header=rewrite localhost:5000
 // Routes
 
@@ -59,10 +61,6 @@ const limiter = rateLimit({
 });
 
 app.use("/api", limiter);
-
-app.get("/.well-known/pki-validation/81D9E49136E158773F8AA5A4FAA1E3AC.txt", (req, res) => {
-  res.sendFile("E:kharphiGithubNew folder\node-app81D9E49136E158773F8AA5A4FAA1E3AC.txt");
-});
 
 // Body parser, reading data from body into req.body
 app.use(
@@ -138,7 +136,7 @@ app.use("/api/v1/favouriteCourse", favouriteCourseRoutes);
 
 // handle undefined Routes
 app.use("*", (req, res, next) => {
-  const err = new AppError(404, "fail", "undefined route");
+  const err = new AppError(404, "failed", "undefined route");
   next(err, req, res, next);
 });
 
